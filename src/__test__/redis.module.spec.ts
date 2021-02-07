@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RedisModule } from '../redis.module';
-import * as Redis from 'ioredis';
+import { TaggableCache as Redis } from 'cache-tags';
 import { createClientToken } from '../utils/create.token';
 import { Injectable } from '@nestjs/common';
 import { InjectRedisClient } from '../decorators';
