@@ -1,4 +1,4 @@
-import * as Redis from 'ioredis';
+import { TaggableCache as Redis } from 'cache-tags';
 import { RedisClientOptions, RedisModuleOptions } from './redis.interface';
 import { NotFoundException, Provider } from '@nestjs/common';
 import { createClientToken } from './utils/create.token';
