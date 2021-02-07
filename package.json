@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-ioredis",
+  "name": "nestjs-ioredis-tags",
   "version": "0.1.8",
   "description": "redis module for nestjs",
   "author": "xp-fly",
