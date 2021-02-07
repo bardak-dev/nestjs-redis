@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xp-fly/nestjs-redis.git"
+    "url": "git+https://github.com/bardak-dev/nestjs-redis"
   },
   "bugs": {
     "url": "https://github.com/xp-fly/nestjs-redis/issues"
