@@ -17,7 +17,7 @@
     "url": "https://github.com/xp-fly/nestjs-redis/issues"
   },
   "dependencies": {
-    "cache-tags": "^2.8.1"
+    "cache-tags": "2.8.1"
   },
   "devDependencies": {
     "@nestjs/common": "^5.4.0",
