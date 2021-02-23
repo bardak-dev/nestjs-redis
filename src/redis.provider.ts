@@ -2,7 +2,10 @@ import { TaggableCache as Redis } from 'cache-tags';
 import { RedisClientOptions, RedisModuleOptions } from './redis.interface';
 import { NotFoundException, Provider } from '@nestjs/common';
 import { createClientToken } from './utils/create.token';
-import { REDIS_CLIENT_DEFAULT_KEY, REDIS_CLIENT_MODULE_OPTIONS } from './redis.constant';
+import {
+  REDIS_CLIENT_DEFAULT_KEY,
+  REDIS_CLIENT_MODULE_OPTIONS,
+} from './redis.constant';
 
 const clients: Map<string, Redis.Redis> = new Map();
 
@@ -22,7 +25,7 @@ export class RedisProvider {
    * @return {Provider[]}
    */
   public static init(options: RedisModuleOptions[]): Provider[] {
-    return options.map(option => this.createRedisClientProvider(option));
+    return options.map((option) => this.createRedisClientProvider(option));
   }
 
   /**
@@ -31,7 +34,9 @@ export class RedisProvider {
    * @param optionProvider
    * @return {Provider}
    */
-  private static createRedisClientProvider(option: RedisModuleOptions): Provider {
+  private static createRedisClientProvider(
+    option: RedisModuleOptions,
+  ): Provider {
     const token = createClientToken(option.name);
     let client: Redis.Redis;
     if (clients.get(token)) {
@@ -44,9 +49,14 @@ export class RedisProvider {
       return {
         provide: token,
         useFactory: (options: RedisModuleOptions[]) => {
-          const config = options.find(item => (item.name === option.name) || (option.name === REDIS_CLIENT_DEFAULT_KEY && item.name === undefined));
-          option = {...option, ...config};
-          client =  this.createClient(option);
+          const config = options.find(
+            (item) =>
+              item.name === option.name ||
+              (option.name === REDIS_CLIENT_DEFAULT_KEY &&
+                item.name === undefined),
+          );
+          option = { ...option, ...config };
+          client = this.createClient(option);
           clients.set(token, client);
           return client;
         },

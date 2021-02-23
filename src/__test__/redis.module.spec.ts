@@ -8,11 +8,13 @@ import { InjectRedisClient } from '../decorators';
 describe('RedisModule', () => {
   it('Instance Redis', async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [RedisModule.forRoot({
-        host: '127.0.0.1',
-        port: 6379,
-        password: '123456',
-      })],
+      imports: [
+        RedisModule.forRoot({
+          host: '127.0.0.1',
+          port: 6379,
+          password: '123456',
+        }),
+      ],
     }).compile();
 
     const app = module.createNestApplication();
@@ -25,17 +27,22 @@ describe('RedisModule', () => {
 
   it('Instance Redis client provider', async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [RedisModule.forRoot([{
-        name: '1',
-        host: '127.0.0.1',
-        port: 6379,
-        password: '123456',
-      }, {
-        name: 'test',
-        host: '127.0.0.1',
-        port: 6379,
-        password: '123456',
-      }])],
+      imports: [
+        RedisModule.forRoot([
+          {
+            name: '1',
+            host: '127.0.0.1',
+            port: 6379,
+            password: '123456',
+          },
+          {
+            name: 'test',
+            host: '127.0.0.1',
+            port: 6379,
+            password: '123456',
+          },
+        ]),
+      ],
     }).compile();
 
     const app = module.createNestApplication();
@@ -50,12 +57,9 @@ describe('RedisModule', () => {
   });
 
   it('inject redis connection', async () => {
-
     @Injectable()
     class TestProvider {
-      constructor(
-        @InjectRedisClient() private redisClient: Redis.Redis,
-      ) {}
+      constructor(@InjectRedisClient() private redisClient: Redis.Redis) {}
 
       getClient() {
         return this.redisClient;
@@ -63,11 +67,13 @@ describe('RedisModule', () => {
     }
 
     const module: TestingModule = await Test.createTestingModule({
-      imports: [RedisModule.forRoot({
-        host: '127.0.0.1',
-        port: 6379,
-        password: '123456',
-      })],
+      imports: [
+        RedisModule.forRoot({
+          host: '127.0.0.1',
+          port: 6379,
+          password: '123456',
+        }),
+      ],
       providers: [TestProvider],
     }).compile();
 
